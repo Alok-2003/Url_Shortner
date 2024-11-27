@@ -9,7 +9,7 @@ export async function GET(req, { params }) {
 
     try {
         const url = await Url.findOne({ shortId });
-        console.log(url); // Ensure the url object is being fetched correctly
+        // console.log(url); // Ensure the url object is being fetched correctly
 
         if (!url) {
             return new Response(JSON.stringify({ message: 'URL not found' }), { status: 404 });
