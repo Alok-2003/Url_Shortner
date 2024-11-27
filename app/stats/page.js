@@ -4,18 +4,32 @@ import { useState } from 'react';
 import axios from 'axios';
 
 export default function Stats() {
-    const [shortId, setShortId] = useState('');
+    const [urlInput, setUrlInput] = useState(''); // Updated to handle full URL input
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(false);
 
+    // Extract shortId from the full URL
+    const extractShortId = (url) => {
+        try {
+            const urlObj = new URL(url);
+            return urlObj.pathname.slice(1); // Assuming shortId is right after "/"
+        } catch (error) {
+            return url; // If URL constructor fails, treat it as shortId directly
+        }
+    };
+
     const fetchStats = async () => {
         setLoading(true);
+        setStats(null); // Clear previous stats
         try {
+            const shortId = extractShortId(urlInput);
+    console.log(shortId)
+
             const { data } = await axios.get(`/api/stats/${shortId}`);
             setStats(data);
         } catch (error) {
             console.error(error);
-            alert('Failed to fetch stats');
+            alert('Failed to fetch stats. Please check the URL or Short ID.');
         } finally {
             setLoading(false);
         }
@@ -28,9 +42,9 @@ export default function Stats() {
                 <div className="mb-4">
                     <input
                         type="text"
-                        placeholder="Enter Short ID"
-                        value={shortId}
-                        onChange={(e) => setShortId(e.target.value)}
+                        placeholder="Paste short URL or enter Short ID"
+                        value={urlInput}
+                        onChange={(e) => setUrlInput(e.target.value)}
                         className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
                     />
                 </div>

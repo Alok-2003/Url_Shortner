@@ -8,10 +8,10 @@ export default function Page({ params }) {
 
   useEffect(() => {
     const redirectToOriginalUrl = async () => {
-      const shortId = await params.shortId; // Extract the shortId from the URL
+      const shortId = await params.shortId; // Get shortId from the URL parameters
 
       try {
-        // Fetch data from the API
+        // Fetch data from the API (it will also increment click count here)
         const res = await fetch(`/api/${shortId}`);
 
         if (!res.ok) {
@@ -23,12 +23,7 @@ export default function Page({ params }) {
         const data = await res.json();
 
         // Try redirecting to the original URL
-        try {
-          // Perform the redirect (this will throw NEXT_REDIRECT during development)
-          router.push(data.originalUrl);
-        } catch {
-          // Do nothing here, as NEXT_REDIRECT is expected during the redirect
-        }
+        router.push(data.originalUrl);
       } catch (error) {
         console.error("Error fetching original URL:", error);
         router.push("/"); // Redirect to homepage in case of an error

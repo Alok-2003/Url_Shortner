@@ -1,30 +1,37 @@
-import connectMongo from "@/lib/dbConnect";
-import Url from "@/models/urlModel";
+import connectMongo from "@/lib/dbConnect";  // Ensure dbConnect is correctly set up
+import Url from "@/models/urlModel"; // Adjust the model path if necessary
 
 export async function GET(req, { params }) {
-  const { shortId } = await params; // Extract shortId from the route
+  const { shortId } = await params;
 
   try {
-    await connectMongo(); // Connect to MongoDB
+    // Connect to MongoDB
+    await connectMongo();
 
-    const url = await Url.findOne({ shortId }); // Find URL by shortId
+    // Find the URL by shortId
+    const url = await Url.findOne({ shortId });
 
     if (!url) {
-      return new Response(JSON.stringify({ error: "URL not found" }), {
+      return new Response(JSON.stringify({ error: 'URL not found' }), {
         status: 404,
       });
     }
 
+    // Increment clickCount
+    url.clickCount += 1;
+    url.lastAccessed = new Date(); // Optionally, update lastAccessed time
+
+    // Save the updated document
+    await url.save();
+
     // Return the original URL
     return new Response(JSON.stringify({ originalUrl: url.originalUrl }), {
       status: 200,
-      headers: { "Content-Type": "application/json" },
     });
   } catch (error) {
-    console.error("Error fetching URL:", error);
-    return new Response(
-      JSON.stringify({ error: "Internal Server Error" }),
-      { status: 500 }
-    );
+    console.error("Error handling URL redirect:", error);
+    return new Response(JSON.stringify({ error: 'Server error' }), {
+      status: 500,
+    });
   }
 }
