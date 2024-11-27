@@ -40,12 +40,12 @@ export default function Stats() {
   };
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen font-mono">
       <Navbar />
-      <main className="flex flex-col items-center justify-center h-[80vh]">
-        <div className="flex flex-col gap-4 items-center justify-center h-[90vh] w-full">
-          <div className="bg-white p-8 rounded-lg shadow-xl ">
-            <h1 className="text-4xl font-bold mb-6 text-center text-indigo-600">
+      <main className="flex flex-col items-center justify-center flex-grow px-4 sm:px-8">
+        <div className="flex flex-col gap-6 items-center justify-center w-full max-w-lg">
+          <div className="bg-white p-8 rounded-lg shadow-xl w-full">
+            <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-center text-indigo-600">
               URL Statistics
             </h1>
 
@@ -61,7 +61,7 @@ export default function Stats() {
 
             <button
               onClick={fetchStats}
-              className="w-full bg-black h-[50px] my-3 flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-500 ease-in-out shadow-md hover:scale-105 hover:shadow-lg before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#009b49] before:to-[rgb(105,184,141)] before:transition-all before:duration-500 before:ease-in-out before:z-[-1] before:rounded-xl hover:before:left-0 text-[#fff]"
+              className="w-full bg-black h-[50px] flex items-center justify-center rounded-xl cursor-pointer relative overflow-hidden transition-all duration-300 ease-in-out shadow-md hover:scale-105 hover:shadow-lg before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-[#009b49] before:to-[rgb(105,184,141)] before:transition-all before:duration-500 before:z-[-1] before:rounded-xl hover:before:left-0 text-white"
               disabled={loading}
             >
               {loading ? "Fetching..." : "Get Stats"}
@@ -73,7 +73,9 @@ export default function Stats() {
                   <span className="font-semibold text-gray-600">
                     Original URL:
                   </span>
-                  <span className="text-gray-800">{stats.originalUrl}</span>
+                  <span className="text-gray-800 break-words">
+                    {stats.originalUrl}
+                  </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="font-semibold text-gray-600">
@@ -94,15 +96,16 @@ export default function Stats() {
           </div>
 
           <Link href="/" className="w-full flex justify-center max-w-md">
-            <button className="relative overflow-hidden rounded-lg h- group hover:animate-pulse hover:shadow-lg hover:scale-105 transition duration-500 before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-br before:from-pink-400 before:via-purple-400 before:to-indigo-400">
-              <span className="relative text-white font-bold px-8 py-2">
-              <House size={27} className="mx-4 " />
+            <button className="relative overflow-hidden rounded-lg h-12 group hover:animate-pulse hover:shadow-lg hover:scale-105 transition duration-300 before:absolute before:inset-0 before:rounded-lg before:bg-gradient-to-br before:from-pink-400 before:via-purple-400 before:to-indigo-400">
+              <span className="relative text-white font-bold px-4 py-2 flex items-center">
+                <House size={24} className="mr-2" />
+                Home
               </span>
             </button>
           </Link>
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

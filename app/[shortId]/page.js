@@ -34,5 +34,15 @@ export default function Page({ params }) {
   }, [params.shortId, router]);
 
   // Fallback render (this won't be reached due to redirection)
-  return <div>Redirecting...</div>;
+  return (/* From Uiverse.io by devAaus */ 
+    <div class="flex-col gap-4 w-full h-screen flex items-center justify-center">
+    <div
+      class="w-24 h-24 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full"
+    >
+      <div
+        class="w-20 h-20 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"
+      ></div>
+    </div>
+  </div>
+    );
 }

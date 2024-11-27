@@ -5,9 +5,9 @@ import React from 'react'
 const Navbar = () => {
   return (
     <nav className="flex w-full justify-center items-center mt-4">
-        <Link href={"/"} class="relative inline-flex h-12 w-[90%] lg:w-1/2 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none">
-          <span class="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"></span>
-          <span class="inline-flex h-full w-full  items-center justify-center rounded-lg bg-slate-950 px-7 text-2xl  text-white font-bold backdrop-blur-3xl gap-2 undefined">
+        <Link href={"/"}  className="relative inline-flex h-12 w-[90%] lg:w-1/2 active:scale-95 transistion overflow-hidden rounded-lg p-[1px] focus:outline-none">
+          <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#e7029a_0%,#f472b6_50%,#bd5fff_100%)]"></span>
+          <span className="inline-flex h-full w-full  items-center justify-center rounded-lg bg-slate-950 px-7 text-2xl  text-white font-bold backdrop-blur-3xl gap-2 undefined">
             Link Crusher
             <svg
               stroke="currentColor"
